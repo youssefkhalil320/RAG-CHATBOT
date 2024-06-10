@@ -3,7 +3,8 @@ from dotenv import load_dotenv
 from modules.pdf_processing import get_pdf_text
 from modules.text_chunking import get_text_chunks
 from modules.vector_store import get_vectorstore
-from modules.conversation import get_conversational_chain
+from modules.conversation import get_conversational_chain, handle_user_question
+from templates.html_template import css, bot_template, user_template
 
 
 def main():
@@ -12,9 +13,16 @@ def main():
     if "conversation" not in st.session_state:
         st.session_state.conversation = None
 
+    if "chat_history" not in st.session_state:
+        st.session_state.chat_history = None
+
     st.set_page_config(page_title="Chat with handbooks", page_icon=":books:")
+    st.write(css, unsafe_allow_html=True)
     st.header("chat with handbooks :books:")
-    st.text_input("Ask a question about the handbook:")
+    user_question = st.text_input("Ask a question about the handbook:")
+
+    if user_question:
+        handle_user_question(user_question)
 
     with st.sidebar:
         st.subheader("handbook")
