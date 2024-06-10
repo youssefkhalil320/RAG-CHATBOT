@@ -7,8 +7,6 @@ This is a chatbot built using python and depends on HuggingFace open-source mode
 ## How It Works
 ------------
 
-![MultiPDF Chat App Diagram](./docs/PDF-LangChain.jpg)
-
 The application follows these steps to provide responses to your questions:
 
 1. PDF Loading: The app reads multiple PDF documents and extracts their text content.
